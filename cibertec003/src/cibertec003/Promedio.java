@@ -9,8 +9,10 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.JTextArea;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
-public class Promedio extends JFrame {
+public class Promedio extends JFrame implements ActionListener {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
@@ -80,6 +82,7 @@ public class Promedio extends JFrame {
 		txtpractica3.setColumns(10);
 		
 		btnProcesar = new JButton("Procesar");
+		btnProcesar.addActionListener(this);
 		btnProcesar.setBounds(236, 23, 89, 23);
 		contentPane.add(btnProcesar);
 		
@@ -88,4 +91,83 @@ public class Promedio extends JFrame {
 		contentPane.add(txtarea);
 	}
 
+	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == btnProcesar) {
+			actionPerformedBtnProcesar(e);
+		}
+	}
+	protected void actionPerformedBtnProcesar(ActionEvent e) {
+		//declaro
+		double promedio;
+		int p1, p2, p3;
+
+		//Entrada de datos
+
+		p1 = Integer.parseInt(txtpractica1.getText());
+
+		p2 = Integer.parseInt(txtpractica2.getText());
+
+		p3 = Integer.parseInt(txtpractica3.getText());
+
+
+		//Si amerita, añade 2 puntos a p1 
+		if (p1 >= 10) {
+			p1 = p1 + 2;
+
+
+		if (p1 > 20)
+			p1 = 20;
+
+		}
+
+
+		//Si amerita, añade 2 puntos a p2 
+		if (p2 >= 10) {
+			p2 = p2 + 2;
+
+		if (p2 > 20)
+			p2 = 20;
+
+		}
+
+		//Si amerita, añade 2 puntos a p3 
+		if (p3 >= 10) {
+			p3 = p3 + 2;
+
+
+		if (p3 > 20)
+			p3 = 20;
+		}
+
+		// Calcula el promedio
+		promedio = (p1 + p2 + p3) / 3.0;
+
+		// Salida de resultados
+		txtarea.setText("Promedio final : " + promedio);
+
+
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	}
 }

@@ -10,8 +10,11 @@ import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JTextField;
 import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import javax.swing.JTextArea;
 
-public class Empleado extends JFrame {
+public class Empleado extends JFrame implements ActionListener {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
@@ -21,6 +24,7 @@ public class Empleado extends JFrame {
 	private JTextField txthoras;
 	private JButton btnProcesar;
 	private JButton btnLimpiar;
+	private JTextArea txtarea;
 
 	/**
 	 * Launch the application.
@@ -70,12 +74,60 @@ public class Empleado extends JFrame {
 		txthoras.setColumns(10);
 		
 		btnProcesar = new JButton("Procesar");
+		btnProcesar.addActionListener(this);
 		btnProcesar.setBounds(333, 50, 89, 23);
 		contentPane.add(btnProcesar);
 		
 		btnLimpiar = new JButton("Limpiar");
 		btnLimpiar.setBounds(333, 94, 89, 23);
 		contentPane.add(btnLimpiar);
+		
+		txtarea = new JTextArea();
+		txtarea.setBounds(59, 157, 386, 170);
+		contentPane.add(txtarea);
 	}
 
+	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == btnProcesar) {
+			actionPerformedBtnProcesar(e);
+		}
+	}
+	protected void actionPerformedBtnProcesar(ActionEvent e) {
+//		Declaración de variables 
+		int categoria;
+		double horas, suelbru, desc, suelnet, tarifa = 0;
+
+		//Entrada de datos
+
+		categoria = combocategoria.getSelectedIndex(); 
+		horas = Double.parseDouble(txthoras.getText());
+
+		//Determina la tarifa horaria if (categoria == 0)
+		tarifa = 45.0;
+
+		if (categoria == 1)
+			tarifa = 37.5;
+
+		if (categoria == 2)
+			tarifa = 35.0;
+
+		if (categoria == 3)
+			tarifa = 32.5;
+
+		//Calcula el sueldo bruto 
+			suelbru = horas * tarifa;
+
+		//Calcula el descuento 
+			desc = 0.15 * suelbru;
+		//Calcula el sueldo neto 
+			suelnet = suelbru - desc;
+
+		//Salida de resultados
+		txtarea.setText("Tarifa horaria : S/." + tarifa + "\n");
+		txtarea.append("Sueldo bruto : S/." + suelbru + "\n");
+		txtarea.append("Descuento	: S/." + desc + "\n");
+		txtarea.append("Sueldo neto	: S/." + suelnet);
+
+		
+	}
 }

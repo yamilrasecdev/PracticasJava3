@@ -23,7 +23,7 @@ public class Angulo extends JFrame implements ActionListener {
 	private JTextField txtgrados;
 	private JTextField txtminutos;
 	private JTextField txtsegundos;
-	private JTextArea textArea;
+	private JTextArea txtarea;
 	private JButton btnBorrar;
 
 	/**
@@ -87,9 +87,9 @@ public class Angulo extends JFrame implements ActionListener {
 		contentPane.add(txtsegundos);
 		txtsegundos.setColumns(10);
 		
-		textArea = new JTextArea();
-		textArea.setBounds(55, 183, 397, 100);
-		contentPane.add(textArea);
+		txtarea = new JTextArea();
+		txtarea.setBounds(55, 183, 397, 100);
+		contentPane.add(txtarea);
 		
 		btnBorrar = new JButton("Borrar");
 		btnBorrar.setBounds(321, 81, 89, 23);
@@ -102,5 +102,47 @@ public class Angulo extends JFrame implements ActionListener {
 		}
 	}
 	protected void actionPerformedBtnNewButton(ActionEvent e) {
+		
+		//Declaración de variables
+
+		int grados, minutos, segundos; 
+		double beta;
+		String tipo = "";
+
+		
+		// Entrada de datos
+
+		grados = Integer.parseInt(txtgrados.getText()); 
+		minutos = Integer.parseInt(txtminutos.getText()); 
+		segundos = Integer.parseInt(txtsegundos.getText());
+
+		// Determina el ángulo en grados
+		beta = grados + minutos / 60.0 + segundos / 3600.0;
+
+		//Determina el tipo de ángulo 
+		if (beta == 0)
+			tipo = "Nulo";
+
+		if (beta > 0 && beta < 90)
+			tipo = "Agudo";
+
+		if (beta == 90)
+			tipo = "Recto";
+
+		if (beta > 90 && beta < 180)
+			tipo = "Obtuso";
+
+		if (beta == 180)
+			tipo = "Llano";
+
+		if (beta > 180 && beta < 360)
+			tipo = "Cóncavo";
+
+		if (beta == 360)
+			tipo = "Completo";
+
+		// Salida de resultados
+		txtarea.setText("El ángulo se clasifica como : " + tipo);
+
 	}
 }

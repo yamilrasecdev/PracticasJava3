@@ -22,7 +22,7 @@ public class Dulceria extends JFrame implements ActionListener {
 	private JTextField txtcantidad;
 	private JLabel lblNewLabel;
 	private JLabel lblNewLabel_1;
-	private JTextArea textArea;
+	private JTextArea txtarea;
 	private JButton btnProcesar;
 
 	/**
@@ -72,9 +72,9 @@ public class Dulceria extends JFrame implements ActionListener {
 		lblNewLabel_1.setBounds(64, 116, 46, 14);
 		contentPane.add(lblNewLabel_1);
 		
-		textArea = new JTextArea();
-		textArea.setBounds(94, 205, 362, 151);
-		contentPane.add(textArea);
+		txtarea = new JTextArea();
+		txtarea.setBounds(94, 205, 362, 151);
+		contentPane.add(txtarea);
 		
 		btnProcesar = new JButton("Procesar");
 		btnProcesar.addActionListener(this);
@@ -87,5 +87,62 @@ public class Dulceria extends JFrame implements ActionListener {
 		}
 	}
 	protected void actionPerformedBtnProcesar(ActionEvent e) {
+		//Declaración de variables
+		int tipo, cantidad, caramelos;
+		double impcom = 0, impdes = 0, imppag;
+
+	//Entrada de datos
+	tipo = combotipo.getSelectedIndex();
+	cantidad = Integer.parseInt(txtcantidad.getText());
+
+
+	//Calcula el importe de la compra 
+	if (tipo == 0)
+		impcom = 8.5 * cantidad;
+
+	if (tipo == 1)
+		impcom = 10.0 * cantidad;
+
+
+	if (tipo == 2)
+		impcom = 7.0 * cantidad;
+
+
+	if (tipo == 3)
+		impcom = 12.5 * cantidad;
+
+
+	//Calcula el importe del descuento 
+	if (cantidad < 5)
+		impdes = 0.04 * impcom;
+
+
+	if (cantidad >= 5 && cantidad < 10)
+		impdes = 0.065 * impcom;
+
+
+	if (cantidad >= 10 && cantidad < 15)
+		impdes = 0.09 * impcom;
+
+
+	if (cantidad >= 15)
+		impdes = 0.115 * impcom;
+	//Calcula el importe a pagar 
+		imppag = impcom - impdes;
+
+	//Calcula la cantidad de caramelos de regalo 
+		if (imppag < 250)
+			caramelos = 2 * cantidad;
+
+		else
+			caramelos = 3 * cantidad;
+
+		//Salida de resultados
+
+	txtarea.setText("Importe de la compra	: S/. " + impcom + "\n");
+	txtarea.append("Importe del descuento : S/. " + impdes + "\n");
+	txtarea.append("Importe a pagar	: S/. " + imppag + "\n");
+	txtarea.append("Caramelos de obsequio : " + caramelos);
+
 	}
 }
