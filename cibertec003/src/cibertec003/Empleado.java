@@ -93,17 +93,20 @@ public class Empleado extends JFrame implements ActionListener {
 		}
 	}
 	protected void actionPerformedBtnProcesar(ActionEvent e) {
-//		Declaración de variables 
-		int categoria;
-		double horas, suelbru, desc, suelnet, tarifa = 0;
+		//Declaración de variables entrada 
+		int categoria;//indice del elemento seleccionado del combo (empieza 0...)
+		//declaracion variable entrada
+		double horas;
+		//Declaracion variables salida
+		double suelbru, desc, suelnet, tarifa = 0;
 
 		//Entrada de datos
+		categoria = combocategoria.getSelectedIndex(); //Devuelve el elemento seleccionado del combo
+		horas = Double.parseDouble(txthoras.getText());//devuelve la cantidad de horas
 
-		categoria = combocategoria.getSelectedIndex(); 
-		horas = Double.parseDouble(txthoras.getText());
-
-		//Determina la tarifa horaria if (categoria == 0)
-		tarifa = 45.0;
+		//Determina la tarifa horaria 
+		if (categoria == 0)
+			tarifa = 45.0;
 
 		if (categoria == 1)
 			tarifa = 37.5;

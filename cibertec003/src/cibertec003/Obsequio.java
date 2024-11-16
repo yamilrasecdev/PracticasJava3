@@ -42,6 +42,7 @@ public class Obsequio extends JFrame implements ActionListener {
 	 * Create the frame.
 	 */
 	public Obsequio() {
+		setTitle("Obsequio");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 714, 442);
 		contentPane = new JPanel();
@@ -84,17 +85,14 @@ public class Obsequio extends JFrame implements ActionListener {
 	}
 	protected void actionPerformedBtnProcesar(ActionEvent e) {
 		//Declaración de variables entrada 
-		int numero;
-
+		int numero=0;
+		//Declaracion de variable salida
 		String obsequio = "Ninguno";
 
 		//Entrada de datos
-
 		numero = Integer.parseInt(txtnumero.getText());
 
-
 		// Determina el obsequio
-
 		if (numero >= 1 && numero <= 20)
 			obsequio = "Un lapicero";
 		

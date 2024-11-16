@@ -95,7 +95,6 @@ public class Dulceria extends JFrame implements ActionListener {
 	tipo = combotipo.getSelectedIndex();
 	cantidad = Integer.parseInt(txtcantidad.getText());
 
-
 	//Calcula el importe de la compra 
 	if (tipo == 0)
 		impcom = 8.5 * cantidad;
@@ -103,42 +102,32 @@ public class Dulceria extends JFrame implements ActionListener {
 	if (tipo == 1)
 		impcom = 10.0 * cantidad;
 
-
 	if (tipo == 2)
 		impcom = 7.0 * cantidad;
 
-
 	if (tipo == 3)
 		impcom = 12.5 * cantidad;
-
 
 	//Calcula el importe del descuento 
 	if (cantidad < 5)
 		impdes = 0.04 * impcom;
 
-
 	if (cantidad >= 5 && cantidad < 10)
 		impdes = 0.065 * impcom;
 
-
 	if (cantidad >= 10 && cantidad < 15)
 		impdes = 0.09 * impcom;
-
 
 	if (cantidad >= 15)
 		impdes = 0.115 * impcom;
 	//Calcula el importe a pagar 
 		imppag = impcom - impdes;
-
 	//Calcula la cantidad de caramelos de regalo 
 		if (imppag < 250)
 			caramelos = 2 * cantidad;
-
 		else
 			caramelos = 3 * cantidad;
-
-		//Salida de resultados
-
+	//Salida de resultados
 	txtarea.setText("Importe de la compra	: S/. " + impcom + "\n");
 	txtarea.append("Importe del descuento : S/. " + impdes + "\n");
 	txtarea.append("Importe a pagar	: S/. " + imppag + "\n");

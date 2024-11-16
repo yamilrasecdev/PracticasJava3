@@ -113,32 +113,26 @@ if (arg0.getSource() == btnBorrar) { actionPerformedBtnBorrar(arg0);
 
 protected void actionPerformedBtnProcesar(ActionEvent arg0) {
 
-//	Declaración de variables
+//	Declaración de variables entrada
 	int unidades;
-
+// declaracion variables salida
 	double impcom = 0, impdes, imppag;
 
 	//Entrada de datos
-
 	unidades = Integer.parseInt(txtUnidades.getText());
-
 
 	//Calcula el importe de la compra 
 	if (unidades >= 1 && unidades <= 25)
 		impcom = unidades * 27.5;
-	
-	
+		
 	if (unidades >= 26 && unidades <= 50)	
 		impcom = unidades * 25.5;
 	
-	
 	if (unidades >= 51 && unidades <= 75)	
-		impcom = unidades * 27.5;
-	
-	
+		impcom = unidades * 23.5;
+		
 	if (unidades >= 76)	
-		impcom = unidades * 27.5;
-	
+		impcom = unidades * 21.5;
 	
 		//Calcula el importe del descuento 
 	if (unidades > 50)
@@ -146,13 +140,8 @@ protected void actionPerformedBtnProcesar(ActionEvent arg0) {
 	else
 		impdes = 0.05 * impcom;
 
-	
-	
-	
-
 	//Calcula el importe a pagar 
-	imppag = impcom - impdes;
-
+		imppag = impcom - impdes;
 
 	//Salida de resultados
 	txtS.setText("Importe de la compra	: " + impcom + "\n");
