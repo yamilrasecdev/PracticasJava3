@@ -19,6 +19,8 @@ public class Dulceria extends JFrame implements ActionListener {
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JComboBox combotipo;
+    //private JComboBox<String> combotipo;
+
 	private JTextField txtcantidad;
 	private JLabel lblNewLabel;
 	private JLabel lblNewLabel_1;
@@ -55,7 +57,14 @@ public class Dulceria extends JFrame implements ActionListener {
 		contentPane.setLayout(null);
 		
 		combotipo = new JComboBox();
-		combotipo.setModel(new DefaultComboBoxModel(new String[] {"Primor", "Dulzura", "Tentacion", "Explocion"}));
+		//JComboBox<String> combotipo = new JComboBox<>();
+		//new String[] {"Primor", "Dulzura", "Tentación", "Explosión"}
+
+		combotipo.setModel(new DefaultComboBoxModel(new String[] {"Primor","Dulzura","Tentacion","Explocion"}));
+		//combotipo.setModel(new DefaultComboBoxModel<>(new String[] {
+	    //        "Primor", "Dulzura", "Tentación", "Explosión"
+	     //   }));
+		
 		combotipo.setBounds(177, 56, 158, 22);
 		contentPane.add(combotipo);
 		
@@ -87,14 +96,17 @@ public class Dulceria extends JFrame implements ActionListener {
 		}
 	}
 	protected void actionPerformedBtnProcesar(ActionEvent e) {
-		//Declaración de variables
+		//Declaración de variables entrada
 		int tipo, cantidad, caramelos;
+		//declaro variables salida
 		double impcom = 0, impdes = 0, imppag;
 
 	//Entrada de datos
+	//Leo el item seleccionado del combobox
 	tipo = combotipo.getSelectedIndex();
-	cantidad = Integer.parseInt(txtcantidad.getText());
-
+	//Leo la cantidad ingresada	
+	cantidad = Integer.parseInt( txtcantidad.getText());
+	
 	//Calcula el importe de la compra 
 	if (tipo == 0)
 		impcom = 8.5 * cantidad;
