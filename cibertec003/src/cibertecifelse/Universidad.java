@@ -25,6 +25,17 @@ public class Universidad extends JFrame implements ActionListener {
 	private JButton btnProcesar;
 	private JTextArea textArea;
 
+		//Declarar variables entrada
+		int categoria;
+		double promedio;
+		//Declarar variable salida
+		double pensionActual;
+		double descuento;
+		double pensionFinal;
+		private JButton btnBorrar;
+	
+	
+	
 	/**
 	 * Launch the application.
 	 */
@@ -54,7 +65,7 @@ public class Universidad extends JFrame implements ActionListener {
 		contentPane.setLayout(null);
 		
 		lblNewLabel = new JLabel("Categoria");
-		lblNewLabel.setBounds(38, 36, 77, 14);
+		lblNewLabel.setBounds(10, 36, 77, 14);
 		contentPane.add(lblNewLabel);
 		
 		comboCategoria = new JComboBox();
@@ -68,24 +79,92 @@ public class Universidad extends JFrame implements ActionListener {
 		txtPromedio.setColumns(10);
 		
 		lblNewLabel_1 = new JLabel("Promedio");
-		lblNewLabel_1.setBounds(25, 95, 46, 14);
+		lblNewLabel_1.setBounds(10, 79, 46, 14);
 		contentPane.add(lblNewLabel_1);
 		
 		btnProcesar = new JButton("Procesar");
 		btnProcesar.addActionListener(this);
-		btnProcesar.setBounds(308, 49, 89, 23);
+		btnProcesar.setBounds(306, 32, 89, 23);
 		contentPane.add(btnProcesar);
 		
 		textArea = new JTextArea();
 		textArea.setBounds(38, 143, 285, 89);
 		contentPane.add(textArea);
+		
+		btnBorrar = new JButton("Limpiar");
+		btnBorrar.addActionListener(this);
+		btnBorrar.setBounds(306, 91, 89, 23);
+		contentPane.add(btnBorrar);
 	}
 	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == btnBorrar) {
+			actionPerformedBtnBorrar(e);
+		}
 		if (e.getSource() == btnProcesar) {
 			actionPerformedBtnProcesar(e);
 		}
 	}
-	protected void actionPerformedBtnProcesar(ActionEvent e) {
+	
+	//Lectura de datos entrada
+	void LecturaDatos() {
+		categoria=comboCategoria.getSelectedIndex();
+		promedio=Double.parseDouble(txtPromedio.getText());
+	}
+	
+	//Calcular Pension actual
+	void CalcularPension() {
+		if (categoria==0)//A
+			pensionActual=550;
+		else if (categoria==1)//B
+			pensionActual=500;
+		else if (categoria==2)//C
+			pensionActual=460;
+		else //D
+			pensionActual=400;
 		
 	}
+	
+	//Calculo Descuento
+	void CalcularDescuento() {
+		if (promedio<=13.99)
+			descuento=0;
+		else if(promedio<=15.99)
+			descuento=0.10*pensionActual;
+		else if(promedio<=17.99)
+			descuento=0.12*pensionActual;
+		else 
+			descuento=0.15*pensionActual;
+	}
+	
+	//Calcular Pension Final
+	void CalcularPensionFinal() {
+		pensionFinal=pensionActual-descuento;
+				
+	}
+	
+	//Imprimir resultados
+	void ImprimirResultados() {
+		textArea.setText("pension actual : S/. " +pensionActual+"\n");
+		textArea.append("descuento : S/."+descuento+"\n");
+		textArea.append("pension final : S/."+pensionFinal+"\n");
+		
+	}
+	
+	
+	protected void actionPerformedBtnBorrar(ActionEvent e) {
+		textArea.setText("");
+	}
+	
+protected void actionPerformedBtnProcesar(ActionEvent e) {
+		
+		//Lectura de datos
+		LecturaDatos();
+			//System.out.println("categoria : " +categoria);
+			//System.out.println("promedio : "+promedio);
+		CalcularPension();
+		CalcularDescuento();
+		CalcularPensionFinal();
+		ImprimirResultados();
+	}
+	
 }

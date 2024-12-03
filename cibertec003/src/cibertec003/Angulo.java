@@ -6,6 +6,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JButton;
 import javax.swing.JTextField;
 import javax.swing.JTextArea;
@@ -101,48 +102,69 @@ public class Angulo extends JFrame implements ActionListener {
 			actionPerformedBtnNewButton(e);
 		}
 	}
-	protected void actionPerformedBtnNewButton(ActionEvent e) {
-		
+	protected void actionPerformedBtnNewButton(ActionEvent e) {		
 		//Declaración de variables
-
 		int grados, minutos, segundos; 
 		double beta;
-		String tipo = "";
-
-		
+		String tipo = "";		
 		// Entrada de datos
-
 		grados = Integer.parseInt(txtgrados.getText()); 
 		minutos = Integer.parseInt(txtminutos.getText()); 
 		segundos = Integer.parseInt(txtsegundos.getText());
 
-		// Determina el ángulo en grados
-		beta = grados + minutos / 60.0 + segundos / 3600.0;
-
-		//Determina el tipo de ángulo 
-		if (beta == 0)
-			tipo = "Nulo";
-
-		if (beta > 0 && beta < 90)
-			tipo = "Agudo";
-
-		if (beta == 90)
-			tipo = "Recto";
-
-		if (beta > 90 && beta < 180)
-			tipo = "Obtuso";
-
-		if (beta == 180)
-			tipo = "Llano";
-
-		if (beta > 180 && beta < 360)
-			tipo = "Cóncavo";
-
-		if (beta == 360)
-			tipo = "Completo";
-
-		// Salida de resultados
-		txtarea.setText("El ángulo se clasifica como : " + tipo);
+		//Validar
+		//Validar - Grados
+		if (grados <0 || grados >360 ) {
+			JOptionPane.showMessageDialog(this, "Grados debe ser de 0 a 360");
+			txtgrados.requestFocus();
+			txtgrados.selectAll();
+			return;//Salir programa
+		}
+				
+		// Validar - Minutos -
+		 if (minutos <0 || minutos>59 ) {
+			JOptionPane.showMessageDialog(this, "Minutos deben ser de 0 a 59");
+			txtminutos.requestFocus();
+			txtminutos.selectAll();
+			return;//Salir del programa
+		}
+		
+		 if (segundos<0 || segundos>59) {
+			JOptionPane.showMessageDialog(this, "segundos deben ser de 0 a 59");
+			txtsegundos.requestFocus();
+			txtsegundos.selectAll();
+			return;
+		}
+		 //{
+		
+			//Calcular Determina el ángulo en grados
+			beta = grados + minutos / 60.0 + segundos / 3600.0;
+	
+			//Determina el tipo de ángulo 
+			if (beta == 0)
+				tipo = "Nulo";
+	
+			if (beta > 0 && beta < 90)
+				tipo = "Agudo";
+	
+			if (beta == 90)
+				tipo = "Recto";
+	
+			if (beta > 90 && beta < 180)
+				tipo = "Obtuso";
+	
+			if (beta == 180)
+				tipo = "Llano";
+	
+			if (beta > 180 && beta < 360)
+				tipo = "Cóncavo";
+	
+			if (beta == 360)
+				tipo = "Completo";
+	
+			// Salida de resultados
+			txtarea.setText("El ángulo se clasifica como : " + tipo);
+		//}
 
 	}
 }
